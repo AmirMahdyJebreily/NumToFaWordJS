@@ -1,2 +1,4 @@
-# NumToFaWord
-Tool to convert numbers to Persian letters
+# عدد به حروف فارسی | NumToFaWord 
+### ابزار تبدیل اعداد به حروف فارسی در زبان های پایتون، جاوا اسکریپت و سی شارپ  
+
+
