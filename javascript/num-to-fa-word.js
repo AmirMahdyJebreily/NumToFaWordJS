@@ -26,11 +26,7 @@ function toFaWord(num) {
     }
 
     function numOfDig(num) {
-        let i = 0;
-        for (i = 0; num.toFixed(0) > 0; i++) {
-            num /= 10;
-        }
-        return i;
+        return Math.pow(10, i);
     }
 
     function getNumPlace(i) {
