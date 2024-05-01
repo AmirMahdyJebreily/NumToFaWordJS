@@ -26,7 +26,7 @@ function toFaWord(num) {
     }
 
     function numOfDig(num) {
-        return Math.pow(10, i);
+        return Math.pow(10, num);
     }
 
     function getNumPlace(i) {
