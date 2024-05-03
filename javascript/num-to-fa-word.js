@@ -33,18 +33,10 @@ function toFaWord(num) {
         return i;
     }
 
-    function getNumPlace(i) {
-        let res = 1;
-        for (let j = i; j > 0; j--) {
-            res *= 10 // Multiplying by 10 is done by the number of rounds we are inside!
-        } //2nd -> Calculating which round of the loop we are in, to find out whether this number that went beyond the floating point is one or tens or...
-        return res;
-    }
-
     function getSetofAddedNumbers(c_num) {
         let res = [];
         for (let i = 0; Math.floor(c_num) > 0; i++) {
-            let mul10 = getNumPlace(i);
+            let mul10 = Math.pow(10, i); // 2nd -> Calculating which round of the loop we are in, to find out whether this number that went beyond the floating point is one or tens or...
 
             c_num /= 10; // 1st -> Divide by 10 to send the one digit to the other side of the floating point!
             res.unshift((Math.round((c_num - (c_num.toFixed(0))) * 10)) * mul10); // At first, we reach a number that has only one floating number, and that is our one, and it is multiplied by mul10 to find out which order we pulled out!
@@ -56,7 +48,7 @@ function toFaWord(num) {
     let res = "";
     for (let i = 0; i < sumSet.length; i++) {
         let num = sumSet[i]
-        let cONum = getNumPlace(numOfDig(num) - 1)
+        let cONum = Math.pow(10, numOfDig(num) - 1)
         let muller = num / cONum
         res += uniqNumbers[muller][0] + uniqNumbers[cONum][0] + " "
     }
