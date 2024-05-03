@@ -15,8 +15,8 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="w-screen h-screen flex justify-center items-center bg-gray-100 py-16 sm:py-12 lg:py-auto bg-[url('https://static.vecteezy.com/system/resources/previews/000/697/960/non_2x/green-and-blue-wavy-gradient-poster-vector.jpg')]">
-	<main class="px-16 py-8 bg-gradient-to-t from-transparent to-gray-300/80 flex justify-center items-center w-full sm:w-96 rounded-3xl backdrop-blur-sm">
+<body class="w-screen h-screen flex justify-center items-center bg-gray-100 py-16 sm:py-12 lg:py-auto bg-gray-700">
+	<main class="px-16 py-8 bg-gradient-to-t from-transparent to-gray-300/20 flex justify-center items-center w-full sm:w-96 rounded-3xl border border-gray-300 backdrop-blur-sm">
 		<h1 class="w-full text-center">
 			<strong class="text-lg sm:text-xl mb-6 lg:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-blue-500 font-black">
 				عدد به حروف فارسی
@@ -31,7 +31,7 @@
 	</main>
 	<script src="./javascript/num-to-fa-word.js"></script>
 	<script>
-		toFaWord(1234);
+		toFaWord(parseInt(document.getElementById('text').value));
 	</script>
 </body>
 
