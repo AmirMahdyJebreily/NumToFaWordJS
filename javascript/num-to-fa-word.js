@@ -53,5 +53,5 @@ function toFaWord(num) {
         res += uniqNumbers[muller][0] + uniqNumbers[cONum][0] + " "
     }
 
-    console.log(res);
+    return res;
 }

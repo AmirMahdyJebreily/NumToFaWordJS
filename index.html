@@ -16,13 +16,16 @@
 </head>
 
 <body class="w-screen h-screen flex justify-center items-center bg-gray-100 py-16 sm:py-12 lg:py-auto bg-gray-700">
-	<main class="px-16 py-8 bg-gradient-to-t from-transparent to-gray-300/20 flex justify-center items-center w-full sm:w-96 rounded-3xl border border-gray-300 backdrop-blur-sm">
+	<main
+		class="px-16 py-8 bg-gradient-to-t from-transparent to-gray-300/20 flex justify-center items-center w-full sm:w-96 rounded-3xl border border-gray-300 backdrop-blur-sm">
 		<h1 class="w-full text-center">
-			<strong class="text-lg sm:text-xl mb-6 lg:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-blue-500 font-black">
+			<strong
+				class="text-lg sm:text-xl mb-6 lg:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-blue-500 font-black">
 				عدد به حروف فارسی
 			</strong>
 			<div class="w-full p-2 mb-6">
-				<input id="text" type="number" class="bg-white/50 rounded-lg outline-none text-lg px-4 pb-3 pt-4 w-full text-gray-600" />
+				<input id="text" type="number"
+					class="bg-white/50 rounded-lg outline-none text-lg px-4 pb-3 pt-4 w-full text-gray-600" />
 			</div>
 			<p class="text-lg text-wrap w-full text-gray-100/60 font-light" id="res">
 				یکصد میلیارد و یکصد و بیست و هشت میلیون و چهارصد و نود سه هزار و هشتصد و بیست و هفت
@@ -31,7 +34,11 @@
 	</main>
 	<script src="./javascript/num-to-fa-word.js"></script>
 	<script>
-		toFaWord(parseInt(document.getElementById('text').value));
+		let text = document.getElementById('text');
+		let res = document.getElementById('res')
+		text.addEventListener('click', () => {
+			res.innerHTML = toFaWord(parseInt(text.value));
+		})
 	</script>
 </body>
 
