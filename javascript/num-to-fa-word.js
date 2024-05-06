@@ -1,30 +1,47 @@
 function toFaWord(num) {
 
     uniqNumbers = { // A dictionary for unique numbers that we cannot construct from their combinations
-        0: [""],
-        1: ['یک', "یاز"],
-        2: ["دو", "دواز"],
-        3: ["سه", "سیز", "سی"],
-        4: ["چهار"],
-        5: ["پنج", "پانز", "پان"],
-        6: ["شش", "شانز"],
-        7: ["هفت", "هف"],
-        8: ["هشت", "هج", "هش"],
-        9: ["نه", "نوز"],
-        10: ["ده"],
-        20: ["بیست"],
-        30: ["سی"],
-        40: ["چهل"],
-        50: ["پنجاه"],
-        60: ["شصت"],
-        70: ["هفتاد"],
-        80: ["هشتاد"],
-        90: ["نود"],
-        100: ["صد", "یست"],
-        1000: ["هزار"],
-        1000000: ["میلیون"],
-        1000000000: ["میلیارد"],
+        0: "",
+        1: 'یک',
+        2: "دو",
+        3: "سه",
+        4: "چهار",
+        5: "پنج",
+        6: "شش",
+        7: "هفت",
+        8: "هشت",
+        9: "نه",
+        10: "ده",
+        11: "یازده",
+        12: "دوازده",
+        13: "سیزده",
+        14: "چهارده",
+        15: "پانزده",
+        16: "شانزده",
+        17: "هفده",
+        18: "هجده",
+        19: "نوزده",
+        20: "بیست",
+        30: "سی",
+        40: "چهل",
+        50: "پنجاه",
+        60: "شصت",
+        70: "هفتاد",
+        80: "هشتاد",
+        90: "نود",
+        100: "صد",
+        200: "دویست"
     }
+
+    decimalShortScaleNames = [ // 10 ^(3n + 3) and here the n is index of array items :-D
+        "",
+        "هزار", // thousand
+        "میلیون", // million 
+        "میلیارد", // billion 
+        "تریلیون", // trillion 
+        "کوآدریلیون", // quadrillion 
+        // ...
+    ]
 
     function numOfDig(num) {
         let i = 0;
@@ -34,35 +51,30 @@ function toFaWord(num) {
         return i;
     }
 
-    function getSetofAddedNumbers(c_num) {
+    function shortScaleBasedSplit(c_num) {
         let res = [];
-        for (let i = 0; Math.floor(c_num) > 0; i++) {
-            let mul10 = Math.pow(10, i); // 2nd -> Calculating which round of the loop we are in, to find out whether this number that went beyond the floating point is one or tens or...
-
-            c_num /= 10; // 1st -> Divide by 10 to send the one digit to the other side of the floating point!
-            console.log(`c_num = ${(c_num)}`)
-            console.log(`[c_num] = ${(Math.floor(c_num).toFixed(0))}`)
-            res.unshift((((c_num - (Math.floor(c_num).toFixed(0))) * 10)).toFixed(0) * mul10); // At first, we reach a number that has only one floating number, and that is our one, and it is multiplied by mul10 to find out which order we pulled out!
+        for (let i = 0; c_num > 0; i++) {
+            taked_number = c_num % Math.pow(10, 3 * (i + 1));
+            res.push(taked_number / Math.pow(10, 3 * i)); // the "res" is used like stack data structure
+            c_num -= taked_number;
         }
         return res;
-    } // To get the set of numbers that are added together to make the num e.g. if the num = 12 then we can say num = 10 + 2
+    } // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
 
-    let sumSet = getSetofAddedNumbers(num)
+    function nameOfThreDigitNumber(num) {
+        if (num < 20)
+            return uniqNumbers[num]
+        return num.toString();
+    }
+
+    let sumSet = shortScaleBasedSplit(num)
     console.log(sumSet);
-    let res = "";
+
+    let res = [];
     for (let i = 0; i < sumSet.length; i++) {
-        let num = sumSet[i]
-        if (num > 0) {
-
-            let cONum = Math.pow(10, numOfDig(num) - 1)
-            console.log(`cONum = ${cONum}`);
-            let muller = num / cONum
-            console.log(`num = ${num}`);
-            console.log(`muller = ${muller}`);
-
-            res += uniqNumbers[muller][0] + uniqNumbers[cONum][0] + " "
-        }
+        num = sumSet[i];
+        res.unshift(nameOfThreDigitNumber(num) + " " + decimalShortScaleNames[i]);
     }
     console.log("---------------------------------------------");
-    return res;
+    return res.join(" و ");
 }
