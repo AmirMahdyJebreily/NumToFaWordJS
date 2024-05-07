@@ -95,8 +95,10 @@ function toFaWord(num) {
 
     let res = [];
     for (let i = 0; i < sumSet.length; i++) {
-        num = sumSet[i];
+        num = sumSet[i]
+        if(num != 0){
         res.unshift(nameOfThreDigitNumber(num) + " " + decimalShortScaleNames[i]);
+        }
     }
     
     return res.join(" و ");
