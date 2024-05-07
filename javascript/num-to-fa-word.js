@@ -91,13 +91,13 @@ function toFaWord(num) {
     }
 
     let sumSet = shortScaleBasedSplit(num)
-    console.log(sumSet);
+    
 
     let res = [];
     for (let i = 0; i < sumSet.length; i++) {
         num = sumSet[i];
         res.unshift(nameOfThreDigitNumber(num) + " " + decimalShortScaleNames[i]);
     }
-    console.log("---------------------------------------------");
+    
     return res.join(" و ");
 }
