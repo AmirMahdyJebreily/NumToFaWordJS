@@ -1,7 +1,6 @@
 function toFaWord(num) {
 
     uniqNumbers = { // A dictionary for unique numbers that we cannot construct from their combinations
-        0: "",
         1: 'یک',
         2: "دو",
         3: "سه",
@@ -30,7 +29,14 @@ function toFaWord(num) {
         80: "هشتاد",
         90: "نود",
         100: "صد",
-        200: "دویست"
+        200: "دویست",
+        300: "سی صد",
+        400: "چهارصد",
+        500: "پانصد",
+        600: "شش صد",
+        700: "هفت صد",
+        800: "هشت صد",
+        900: "نه صد"
     }
 
     decimalShortScaleNames = [ // 10 ^(3n + 3) and here the n is index of array items :-D
@@ -51,6 +57,16 @@ function toFaWord(num) {
         return i;
     }
 
+    function digitSpliter(c_num, n = 1) {
+        let res = [];
+        for (let i = 0; c_num > 0; i++) {
+            taked_number = c_num % Math.pow(10, n * (i + 1));
+            res.push(taked_number); // the "res" is used like stack data structure
+            c_num -= taked_number;
+        }
+        return res;
+    }
+
     function shortScaleBasedSplit(c_num) {
         let res = [];
         for (let i = 0; c_num > 0; i++) {
@@ -62,9 +78,16 @@ function toFaWord(num) {
     } // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
 
     function nameOfThreDigitNumber(num) {
+        let res = []
         if (num < 20)
             return uniqNumbers[num]
-        return num.toString();
+
+        digitSpliter(num).forEach(d => {
+            if (d != 0) {
+                res.unshift(uniqNumbers[d]);
+            }
+        });
+        return res.join(" و ");
     }
 
     let sumSet = shortScaleBasedSplit(num)
