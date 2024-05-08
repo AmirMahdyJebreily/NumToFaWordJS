@@ -49,14 +49,6 @@ function toFaWord(num) {
         // ...
     ]
 
-    function numOfDig(num) {
-        let i = 0;
-        for (i = 0; Math.floor(num).toFixed(0) > 0; i++) {
-            num /= 10;
-        }
-        return i;
-    }
-
     function digitSpliter(c_num, n = 1) {
         let res = [];
         for (let i = 0; c_num > 0; i++) {
