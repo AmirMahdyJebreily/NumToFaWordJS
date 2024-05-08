@@ -1,5 +1,4 @@
 function toFaWord(num) {
-
     let uniqNumbers = { // A dictionary for unique numbers that we cannot construct from their combinations
         1: 'یک',
         2: "دو",
@@ -49,17 +48,17 @@ function toFaWord(num) {
         // ...
     ]
 
-    const digitSpliter = (c_num, n = 1, rmzero = false) => {
+    const digitSpliter = (num = 0, inpower = 1, rm_zero = false) => {
         let res = [];
-        for (let i = 0; c_num > 0; i++) {
-            taked_number = c_num % Math.pow(10, n * (i + 1));
-            res.push(taked_number / ((rmzero === true) ? Math.pow(10, n * i) : 1)); // the "res" is used like stack data structure
-            c_num -= taked_number;
+        for (let i = 0; num > 0; i++) {
+            taked_number = num % Math.pow(10, inpower * (i + 1));
+            res.push(taked_number / ((rm_zero === true) ? Math.pow(10, inpower * i) : 1)); // the "res" is used like stack data structure
+            num -= taked_number;
         }
         return res;
-    }
+    } /* Works with raw math ^_^ */
 
-    const nameOfThreDigitNumber = (num) => {
+    const nameOfThreeDigitNumber = (num) => {
         let res = []
         if (num < 20)
             return uniqNumbers[num]
@@ -71,6 +70,15 @@ function toFaWord(num) {
         });
         return res.join(" و ");
     }
+    let neg = ""
+
+    if (num < 0) {
+        neg = "منفی "
+        num *= -1
+    }
+    else if (num == 0) {
+        return "صفر"
+    }
 
     let sumSet = digitSpliter(num, 3, true) // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
 
@@ -78,9 +86,9 @@ function toFaWord(num) {
     for (let i = 0; i < sumSet.length; i++) {
         num = sumSet[i]
         if (num != 0) {
-            res.unshift(nameOfThreDigitNumber(num) + " " + decimalShortScaleNames[i]);
+            res.unshift(nameOfThreeDigitNumber(num) + " " + decimalShortScaleNames[i]);
         }
     }
 
-    return res.join(" و ");
+    return neg + res.join(" و ");
 }
