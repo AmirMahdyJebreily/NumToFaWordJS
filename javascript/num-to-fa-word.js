@@ -1,6 +1,6 @@
 function toFaWord(num) {
 
-    uniqNumbers = { // A dictionary for unique numbers that we cannot construct from their combinations
+    let uniqNumbers = { // A dictionary for unique numbers that we cannot construct from their combinations
         1: 'یک',
         2: "دو",
         3: "سه",
@@ -39,7 +39,7 @@ function toFaWord(num) {
         900: "نهصد"
     }
 
-    decimalShortScaleNames = [ // 10 ^(3n + 3) and here the n is index of array items :-D
+    let decimalShortScaleNames = [ // 10 ^(3n + 3) and here the n is index of array items :-D
         "",
         "هزار", // thousand
         "میلیون", // million 
@@ -49,32 +49,22 @@ function toFaWord(num) {
         // ...
     ]
 
-    const digitSpliter = (c_num, n = 1) => {
+    const digitSpliter = (c_num, n = 1, rmzero = false) => {
         let res = [];
         for (let i = 0; c_num > 0; i++) {
             taked_number = c_num % Math.pow(10, n * (i + 1));
-            res.push(taked_number); // the "res" is used like stack data structure
+            res.push(taked_number / ((rmzero === true) ? Math.pow(10, n * i) : 1)); // the "res" is used like stack data structure
             c_num -= taked_number;
         }
         return res;
     }
-
-    const shortScaleBasedSplit = (c_num) => {
-        let res = [];
-        for (let i = 0; c_num > 0; i++) {
-            taked_number = c_num % Math.pow(10, 3 * (i + 1));
-            res.push(taked_number / Math.pow(10, 3 * i)); // the "res" is used like stack data structure
-            c_num -= taked_number;
-        }
-        return res;
-    } // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
 
     const nameOfThreDigitNumber = (num) => {
         let res = []
         if (num < 20)
             return uniqNumbers[num]
 
-        digitSpliter(num).forEach(d => {
+        digitSpliter(num, 1, false).forEach(d => {
             if (d != 0) {
                 res.unshift(uniqNumbers[d]);
             }
@@ -82,7 +72,7 @@ function toFaWord(num) {
         return res.join(" و ");
     }
 
-    let sumSet = shortScaleBasedSplit(num)
+    let sumSet = digitSpliter(num, 3, true) // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
 
     let res = [];
     for (let i = 0; i < sumSet.length; i++) {
