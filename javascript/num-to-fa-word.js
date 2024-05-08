@@ -52,7 +52,7 @@ function toFaWord(num) {
         let res = [];
         for (let i = 0; num > 0; i++) {
             taked_number = num % Math.pow(10, inpower * (i + 1));
-            res.push(taked_number / ((rm_zero === true) ? Math.pow(10, inpower * i) : 1)); // the "res" is used like stack data structure
+            res.unshift(taked_number / ((rm_zero === true) ? Math.pow(10, inpower * i) : 1)); // the "res" is used like stack data structure
             num -= taked_number;
         }
         return res;
@@ -63,11 +63,18 @@ function toFaWord(num) {
         if (num < 20)
             return uniqNumbers[num]
 
-        digitSpliter(num, 1, false).forEach(d => {
+        let digits = digitSpliter(num, 1, false)
+        for (let i = 0; i < digits.length; i++) {
+            let d = digits[i]
             if (d != 0) {
-                res.unshift(uniqNumbers[d]);
+                if(digits.length == 3 && i == 1 && d == 10){
+                    res.push(uniqNumbers[d + digits[++i]]);
+                    continue
+                }
+                res.push(uniqNumbers[d]);
+
             }
-        });
+        };
         return res.join(" و ");
     }
     let neg = ""
@@ -86,7 +93,7 @@ function toFaWord(num) {
     for (let i = 0; i < sumSet.length; i++) {
         num = sumSet[i]
         if (num != 0) {
-            res.unshift(nameOfThreeDigitNumber(num) + " " + decimalShortScaleNames[i]);
+            res.push(nameOfThreeDigitNumber(num) + " " + decimalShortScaleNames[i]);
         }
     }
 

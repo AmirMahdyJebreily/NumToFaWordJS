@@ -27,14 +27,21 @@
 				<input id="text" type="number" onchange="changeHandler(this)"
 					class="bg-white/50 w-full sm:w-72 rounded-lg outline-none text-lg px-4 pb-3 pt-4 w-full text-gray-600 shadow-md text-center" />
 			</div>
-			<p class="text-lg text-wrap w-full text-gray-100 opacity-70 font-light" id="res">عدد مورد نظر را در کادر بالا وارد کنید!</p>
+			<p class="text-lg text-wrap w-full text-gray-100 opacity-70 font-light" id="res">عدد مورد نظر را در کادر
+				بالا وارد کنید!</p>
 		</h1>
 	</main>
 	<script src="./javascript/num-to-fa-word.js"></script>
 	<script>
 		function changeHandler(elem) {
-			document.getElementById('res').innerHTML = toFaWord(parseInt(elem.value))
-			
+			if (elem.value == "") {
+				document.getElementById('res').innerHTML = "عدد مورد نظر را در کادر بالا وارد کنید"
+			}
+			else {
+
+				document.getElementById('res').innerHTML = toFaWord(parseInt(elem.value))
+			}
+
 		}
 	</script>
 </body>
