@@ -33,9 +33,9 @@ function toFaWord(num) {
         300: "سیصد",
         400: "چهارصد",
         500: "پانصد",
-        600: "شش‌صد",
-        700: "هفت‌صد",
-        800: "هشت‌صد",
+        600: "ششصد",
+        700: "هفتصد",
+        800: "هشتصد",
         900: "نهصد"
     }
 
@@ -49,7 +49,7 @@ function toFaWord(num) {
         // ...
     ]
 
-    function digitSpliter(c_num, n = 1) {
+    const digitSpliter = (c_num, n = 1) => {
         let res = [];
         for (let i = 0; c_num > 0; i++) {
             taked_number = c_num % Math.pow(10, n * (i + 1));
@@ -59,7 +59,7 @@ function toFaWord(num) {
         return res;
     }
 
-    function shortScaleBasedSplit(c_num) {
+    const shortScaleBasedSplit = (c_num) => {
         let res = [];
         for (let i = 0; c_num > 0; i++) {
             taked_number = c_num % Math.pow(10, 3 * (i + 1));
@@ -69,7 +69,7 @@ function toFaWord(num) {
         return res;
     } // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
 
-    function nameOfThreDigitNumber(num) {
+    const nameOfThreDigitNumber = (num) => {
         let res = []
         if (num < 20)
             return uniqNumbers[num]
@@ -83,15 +83,14 @@ function toFaWord(num) {
     }
 
     let sumSet = shortScaleBasedSplit(num)
-    
 
     let res = [];
     for (let i = 0; i < sumSet.length; i++) {
         num = sumSet[i]
-        if(num != 0){
-        res.unshift(nameOfThreDigitNumber(num) + " " + decimalShortScaleNames[i]);
+        if (num != 0) {
+            res.unshift(nameOfThreDigitNumber(num) + " " + decimalShortScaleNames[i]);
         }
     }
-    
+
     return res.join(" و ");
 }
