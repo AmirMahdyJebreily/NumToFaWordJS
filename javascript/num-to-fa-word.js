@@ -1,4 +1,4 @@
-function toFaWord(num) {
+function toFaWord(input = "") {
     let uniqNumbers = { // A dictionary for unique numbers that we cannot construct from their combinations
         1: 'یک',
         2: "دو",
@@ -48,6 +48,12 @@ function toFaWord(num) {
         // ...
     ]
 
+    const nameOfUnderZeroPart = (num, i) => {
+        // 0.0002345
+
+        return `${toFaWord(Math.pow(10, i).toString()).trim()}م`;
+    }
+
     const digitSpliter = (num = 0, inpower = 1, rm_zero = false) => {
         let res = [];
         for (let i = 0; num > 0; i++) {
@@ -67,7 +73,7 @@ function toFaWord(num) {
         for (let i = 0; i < digits.length; i++) {
             let d = digits[i]
             if (d != 0) {
-                if(digits.length == 3 && i == 1 && d == 10){
+                if (digits.length == 3 && i == 1 && d == 10) {
                     res.push(uniqNumbers[d + digits[++i]]);
                     continue
                 }
@@ -77,6 +83,8 @@ function toFaWord(num) {
         };
         return res.join(" و ");
     }
+    let num = parseInt(input);
+    let flnum = (input.split(".")[1]);
     let neg = ""
 
     if (num < 0) {
@@ -86,16 +94,18 @@ function toFaWord(num) {
     else if (num == 0) {
         return "صفر"
     }
-
-    let sumSet = digitSpliter(num, 3, true) // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
-
+    let floatP = "";
+    if (flnum !== undefined) {
+        floatP = nameOfUnderZeroPart(parseInt(flnum), flnum.length)
+    }
+    let sumSet = digitSpliter(num, 3, true).reverse() // We get a stack whose member with index n is multiplied by the formula (10 ^(3n + 3))! Now we can name the number ^_^
     let res = [];
     for (let i = 0; i < sumSet.length; i++) {
-        num = sumSet[i]
-        if (num != 0) {
-            res.push(nameOfThreeDigitNumber(num) + " " + decimalShortScaleNames[i]);
+        let d_num = sumSet[i]
+        if (d_num != 0) {
+            res.unshift(nameOfThreeDigitNumber(d_num) + " " + decimalShortScaleNames[i]);
         }
     }
 
-    return neg + res.join(" و ");
+    return `${neg}${res.join(" و ")}${((floatP != "") ? "و " + toFaWord(flnum.toString()) + floatP : '')}`;
 }
