@@ -91,9 +91,10 @@ function toFaWord(input = "") {
         neg = "منفی "
         num *= -1
     }
-    else if (num == 0) {
+    else if (num == 0 && flnum === undefined) {
         return "صفر"
     }
+    
     let floatP = "";
     if (flnum !== undefined) {
         floatP = nameOfUnderZeroPart(parseInt(flnum), flnum.length)
