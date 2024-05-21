@@ -1,4 +1,4 @@
-function toFaWord(input = "") {
+export default function toFaWord(input = "") {
     let uniqNumbers = { // A dictionary for unique numbers that we cannot construct from their combinations
         1: 'یک',
         2: "دو",
