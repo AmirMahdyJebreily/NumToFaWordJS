@@ -1,6 +1,6 @@
 {
-  "name": "num-to-fa-word-js",
-  "version": "1.0.0",
+  "name": "num-to-fa-word",
+  "version": "1.0.1",
   "description": "Tool to convert numbers to Persian letters for javascript developers",
   "main": "index.js",
   "scripts": {
