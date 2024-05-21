@@ -57,7 +57,7 @@ export default function toFaWord(input = "") {
     const digitSpliter = (num = 0, inpower = 1, rm_zero = false) => {
         let res = [];
         for (let i = 0; num > 0; i++) {
-            taked_number = num % Math.pow(10, inpower * (i + 1));
+            let taked_number = num % Math.pow(10, inpower * (i + 1));
             res.unshift(taked_number / ((rm_zero === true) ? Math.pow(10, inpower * i) : 1)); // the "res" is used like stack data structure
             num -= taked_number;
         }
