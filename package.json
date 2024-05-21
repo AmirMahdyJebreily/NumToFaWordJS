@@ -1,0 +1,23 @@
+{
+  "name": "num-to-word-js",
+  "version": "1.0.0",
+  "description": "Tool to convert numbers to Persian letters for javascript developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmirMahdyJebreily/NumToFaWordJS.git"
+  },
+  "keywords": [
+    "persian",
+    "number-to-words"
+  ],
+  "author": "CodeAgha amirmahdyjdx@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AmirMahdyJebreily/NumToFaWordJS/issues"
+  },
+  "homepage": "https://github.com/AmirMahdyJebreily/NumToFaWordJS#readme"
+}
